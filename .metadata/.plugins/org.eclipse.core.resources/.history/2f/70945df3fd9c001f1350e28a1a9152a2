@@ -1,0 +1,15 @@
+package LoginPage;
+
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+
+public class flipkartLoginPage {
+
+	WebDriver driver = new ChromeDriver();
+	driver.get("https://www.amazon.in/");
+	Thread.sleep(2000);
+	System.out.println("enter in loop");
+	driver.findElement(By.id("nav-link-accountList-nav-line-1")).click();
+	
+}

@@ -1,0 +1,70 @@
+package LoginPage;
+
+import java.util.concurrent.TimeUnit;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Test;
+
+import dev.failsafe.internal.util.Assert;
+
+public class FlipkartLoginTest {
+	WebDriver driver;
+	
+	@BeforeClass
+    public void setup() {
+        // Set the path to the ChromeDriver
+     //   System.setProperty("webdriver.chrome.driver", "path/to/chromedriver");
+
+        // Initialize WebDriver
+        driver = new ChromeDriver();
+
+        // Configure browser
+        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+        driver.manage().window().maximize();
+
+        // Navigate to Flipkart
+        driver.get("https://www.flipkart.com/");
+    }
+
+    @Test
+    public void testLogin() {
+        try {
+            // Close initial login pop-up
+            WebElement closePopup = driver.findElement(By.cssSelector("button[class='_2KpZ6l _2doB4z']"));
+            closePopup.click();
+        } catch (Exception e) {
+            System.out.println("Login pop-up not found or already closed.");
+        }
+
+        // Click on the login option
+        WebElement loginButton = driver.findElement(By.linkText("Login"));
+        loginButton.click();
+
+        // Enter email/phone and password
+        WebElement usernameField = driver.findElement(By.cssSelector("input[class='_2IX_2- VJZDxU']"));
+        WebElement passwordField = driver.findElement(By.cssSelector("input[type='password']"));
+        
+        usernameField.sendKeys("your-email-or-phone"); // Replace with valid Flipkart username
+        passwordField.sendKeys("your-password"); // Replace with valid Flipkart password
+
+        // Click on Login
+        WebElement submitButton = driver.findElement(By.cssSelector("button[class='_2KpZ6l _2HKlqd _3AWRsL']"));
+        submitButton.click();
+
+        // Verify successful login by checking for user profile name or logout button
+        WebElement userIcon = driver.findElement(By.cssSelector("div[class='_1ruvv2']"));
+      //  Assert.assertTrue(userIcon.isDisplayed(), "Login failed, user icon not displayed.");
+    }
+
+    @AfterClass
+    public void tearDown() {
+        driver.quit();
+    }
+}
+
+

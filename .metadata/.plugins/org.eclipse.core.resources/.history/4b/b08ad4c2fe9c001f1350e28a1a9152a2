@@ -1,0 +1,14 @@
+package LoginPage;
+
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+public class flipkartLoginPage {
+	@Test
+	public static void Login() {
+		WebDriver driver = new ChromeDriver();
+		driver.manage().window();
+		driver.get("https://www.flipkart.com/");
+	}
+
+}
